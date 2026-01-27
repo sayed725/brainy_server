@@ -14,3 +14,9 @@
 // BETTER_AUTH_URL=  Base URL of your app
 
 // APP_URL= Frontend URL of your app
+
+
+
+
+// GOOGLE_CLIENT_ID= your_google_client_id_here
+// GOOGLE_CLIENT_SECRET= your_google_client_secret_here
