@@ -1,3 +1,4 @@
+import { User } from "../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
 
 const getAllUsers = async () => {
@@ -19,7 +20,26 @@ const getSingleUser = async (userId: string ) => {
   return user;
 }
 
+const updateUser = async(paramsId: string, data:User, userId: string, isAdmin: boolean) => {
+
+  if (paramsId !== userId && !isAdmin) {
+    throw new Error("You are not authorized to update this user");
+  }
+
+  console.log(paramsId,data,userId,isAdmin)
+
+  const result = await prisma.user.update({
+    where: {
+      id: paramsId,
+    },
+    data,
+  });
+
+  return result
+}
+
 export const userService = {
   getAllUsers,
-  getSingleUser
+  getSingleUser,
+  updateUser
 };

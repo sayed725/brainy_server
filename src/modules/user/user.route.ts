@@ -11,4 +11,8 @@ const userRouter = Router();
  userRouter.get('/:userId', userController.getSingleUser)
 
 
+ userRouter.patch('/:userId',auth(),userController.updateUser )
+
+
+
 export default userRouter;
