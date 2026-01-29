@@ -338,7 +338,7 @@ export type TutorScalarWhereWithAggregatesInput = {
 }
 
 export type TutorCreateInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -353,7 +353,7 @@ export type TutorCreateInput = {
 }
 
 export type TutorUncheckedCreateInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -398,7 +398,7 @@ export type TutorUncheckedUpdateInput = {
 }
 
 export type TutorCreateManyInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -644,7 +644,7 @@ export type TutorUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type TutorCreateWithoutReviewsInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -658,7 +658,7 @@ export type TutorCreateWithoutReviewsInput = {
 }
 
 export type TutorUncheckedCreateWithoutReviewsInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -716,7 +716,7 @@ export type TutorUncheckedUpdateWithoutReviewsInput = {
 }
 
 export type TutorCreateWithoutBookingsInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -730,7 +730,7 @@ export type TutorCreateWithoutBookingsInput = {
 }
 
 export type TutorUncheckedCreateWithoutBookingsInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -788,7 +788,7 @@ export type TutorUncheckedUpdateWithoutBookingsInput = {
 }
 
 export type TutorCreateWithoutCategoriesInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -802,7 +802,7 @@ export type TutorCreateWithoutCategoriesInput = {
 }
 
 export type TutorUncheckedCreateWithoutCategoriesInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -858,7 +858,7 @@ export type TutorScalarWhereInput = {
 }
 
 export type TutorCreateWithoutUserInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -872,7 +872,7 @@ export type TutorCreateWithoutUserInput = {
 }
 
 export type TutorUncheckedCreateWithoutUserInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -912,7 +912,7 @@ export type TutorUpdateManyWithWhereWithoutUserInput = {
 }
 
 export type TutorCreateManyCategoriesInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
@@ -964,7 +964,7 @@ export type TutorUncheckedUpdateManyWithoutCategoriesInput = {
 }
 
 export type TutorCreateManyUserInput = {
-  id: string
+  id?: string
   bio?: string | null
   rate?: number
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]

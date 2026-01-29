@@ -27,7 +27,7 @@ enum TimeSlot {
 }
 
 model Review {
-  id      Int    @id @default(autoincrement())
+  id      Int     @id @default(autoincrement())
   rating  Int
   comment String? @db.Text
 
@@ -47,7 +47,7 @@ model Review {
 }
 
 model Booking {
-  id          String   @id
+  id          String   @id @default(uuid())
   bookingDate DateTime
   startTime   DateTime
   endTime     DateTime
@@ -71,7 +71,7 @@ model Booking {
 }
 
 model Tutor {
-  id            String     @id
+  id            String     @id @default(uuid())
   bio           String?    @db.Text
   rate          Int        @default(0)
   timeSlots     TimeSlot[]

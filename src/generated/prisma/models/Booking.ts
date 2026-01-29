@@ -331,7 +331,7 @@ export type BookingScalarWhereWithAggregatesInput = {
 }
 
 export type BookingCreateInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
@@ -345,7 +345,7 @@ export type BookingCreateInput = {
 }
 
 export type BookingUncheckedCreateInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
@@ -387,7 +387,7 @@ export type BookingUncheckedUpdateInput = {
 }
 
 export type BookingCreateManyInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
@@ -590,7 +590,7 @@ export type BookingUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type BookingCreateWithoutReviewsInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
@@ -603,7 +603,7 @@ export type BookingCreateWithoutReviewsInput = {
 }
 
 export type BookingUncheckedCreateWithoutReviewsInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
@@ -658,7 +658,7 @@ export type BookingUncheckedUpdateWithoutReviewsInput = {
 }
 
 export type BookingCreateWithoutTutorInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
@@ -671,7 +671,7 @@ export type BookingCreateWithoutTutorInput = {
 }
 
 export type BookingUncheckedCreateWithoutTutorInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
@@ -726,7 +726,7 @@ export type BookingScalarWhereInput = {
 }
 
 export type BookingCreateWithoutUserInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
@@ -739,7 +739,7 @@ export type BookingCreateWithoutUserInput = {
 }
 
 export type BookingUncheckedCreateWithoutUserInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
@@ -778,7 +778,7 @@ export type BookingUpdateManyWithWhereWithoutUserInput = {
 }
 
 export type BookingCreateManyTutorInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
@@ -828,7 +828,7 @@ export type BookingUncheckedUpdateManyWithoutTutorInput = {
 }
 
 export type BookingCreateManyUserInput = {
-  id: string
+  id?: string
   bookingDate: Date | string
   startTime: Date | string
   endTime: Date | string
