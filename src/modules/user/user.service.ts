@@ -42,10 +42,18 @@ const updateUser = async(paramsId: string, data:User, userId: string, isAdmin: b
 
 const deleteUser = async (paramsId: string, userId: string, isAdmin: boolean) => {
   // logic to delete user here
-  console.log(paramsId, userId, isAdmin)
+  // console.log(paramsId, userId, isAdmin)
 
    if (paramsId !== userId && !isAdmin) {
     throw new Error("You are not authorized to update this user");
+  }
+
+   const user = await prisma.user.findUnique({
+    where: { id: paramsId },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
   }
 
   const result = await prisma.user.delete({

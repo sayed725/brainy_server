@@ -64,29 +64,37 @@ const updateUser = async (req: Request, res: Response) => {
 };
 
 const deleteUser = async (req: Request, res: Response) => {
-  // logic to delete user
   try {
     const user = req.user;
+
     if (!user) {
-      throw new Error("You are unauthorized!");
+      return res.status(401).json({
+        error: "Unauthorized",
+      });
     }
 
     const isAdmin = user.role === UserRole.ADMIN;
-
     const { userId } = req.params;
-    const result = await userService.deleteUser(
-      userId as string,
-      user.id,
-      isAdmin,
-    );
-    res.status(200).json(result);
-  } catch (e) {
-    res.status(400).json({
+
+    const result = await userService.deleteUser(userId as string, user.id, isAdmin);
+
+    return res.status(204).json(result); // No Content
+
+  } catch (e: any) {
+    if (e.message === "You are not authorized to delete this user") {
+      return res.status(403).json({ error: e.message });
+    }
+
+    if (e.message === "User not found") {
+      return res.status(404).json({ error: e.message });
+    }
+
+    return res.status(500).json({
       error: "User delete failed",
-      details: e,
     });
   }
 };
+
 
 export const userController = {
   getAllUsers,
