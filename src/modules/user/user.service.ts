@@ -26,7 +26,7 @@ const updateUser = async(paramsId: string, data:User, userId: string, isAdmin: b
     throw new Error("You are not authorized to update this user");
   }
 
-  console.log(paramsId,data,userId,isAdmin)
+  // console.log(paramsId,data,userId,isAdmin)
 
   const result = await prisma.user.update({
     where: {
@@ -35,11 +35,32 @@ const updateUser = async(paramsId: string, data:User, userId: string, isAdmin: b
     data,
   });
 
-  return result
+  return result;
+}
+
+
+
+const deleteUser = async (paramsId: string, userId: string, isAdmin: boolean) => {
+  // logic to delete user here
+  console.log(paramsId, userId, isAdmin)
+
+   if (paramsId !== userId && !isAdmin) {
+    throw new Error("You are not authorized to update this user");
+  }
+
+  const result = await prisma.user.delete({
+    where: {
+      id: paramsId
+    }
+  })
+
+  return result;
+
 }
 
 export const userService = {
   getAllUsers,
   getSingleUser,
-  updateUser
+  updateUser,
+  deleteUser
 };

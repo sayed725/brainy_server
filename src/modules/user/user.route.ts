@@ -11,7 +11,9 @@ const userRouter = Router();
  userRouter.get('/:userId', userController.getSingleUser)
 
 
- userRouter.patch('/:userId',auth(),userController.updateUser )
+ userRouter.patch('/:userId',auth(UserRole.ADMIN, UserRole.USER, UserRole.TUTOR),userController.updateUser)
+
+ userRouter.delete('/:userId', auth(UserRole.ADMIN, UserRole.USER, UserRole.TUTOR),userController.deleteUser)
 
 
 

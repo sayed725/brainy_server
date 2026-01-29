@@ -37,16 +37,17 @@ const getSingleUser = async (req: Request, res: Response) => {
 
 const updateUser = async (req: Request, res: Response) => {
   try {
+    // logic to update user
     const user = req.user;
     if (!user) {
       throw new Error("You are unauthorized!");
     }
 
-    console.log("fun hit");
+    // console.log("fun hit");
 
     const { userId } = req.params;
     const isAdmin = user.role === UserRole.ADMIN;
-    console.log(isAdmin);
+    // console.log(isAdmin);
     const result = await userService.updateUser(
       userId as string,
       req.body,
@@ -62,8 +63,34 @@ const updateUser = async (req: Request, res: Response) => {
   }
 };
 
+const deleteUser = async (req: Request, res: Response) => {
+  // logic to delete user
+  try {
+    const user = req.user;
+    if (!user) {
+      throw new Error("You are unauthorized!");
+    }
+
+    const isAdmin = user.role === UserRole.ADMIN;
+
+    const { userId } = req.params;
+    const result = await userService.deleteUser(
+      userId as string,
+      user.id,
+      isAdmin,
+    );
+    res.status(200).json(result);
+  } catch (e) {
+    res.status(400).json({
+      error: "User delete failed",
+      details: e,
+    });
+  }
+};
+
 export const userController = {
   getAllUsers,
   getSingleUser,
   updateUser,
+  deleteUser,
 };
