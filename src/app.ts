@@ -3,6 +3,7 @@ import cors from 'cors';
 import { toNodeHandler } from "better-auth/node";
 import { auth } from './lib/auth';
 import routes from './routes';
+import { notFound } from './middlewares/notFound';
 
 const app = express();
 
@@ -22,5 +23,7 @@ app.use('/api/v1', routes)
 app.get('/', (req, res)=> {
     res.send("Hello from Brainy App!")
 })
+
+app.use(notFound);
 
 export default app;

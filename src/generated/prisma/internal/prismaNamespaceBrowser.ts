@@ -51,7 +51,10 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Post: 'Post',
+  Review: 'Review',
+  Booking: 'Booking',
+  Tutor: 'Tutor',
+  Categories: 'Categories',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
@@ -74,15 +77,58 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const PostScalarFieldEnum = {
+export const ReviewScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  content: 'content',
-  published: 'published',
-  authorId: 'authorId'
+  rating: 'rating',
+  comment: 'comment',
+  createdAt: 'createdAt',
+  userId: 'userId',
+  tutorId: 'tutorId',
+  bookingId: 'bookingId'
 } as const
 
-export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const BookingScalarFieldEnum = {
+  id: 'id',
+  bookingDate: 'bookingDate',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  status: 'status',
+  totalPrice: 'totalPrice',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId',
+  tutorId: 'tutorId'
+} as const
+
+export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const TutorScalarFieldEnum = {
+  id: 'id',
+  bio: 'bio',
+  rate: 'rate',
+  timeSlots: 'timeSlots',
+  availability: 'availability',
+  averageRating: 'averageRating',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId',
+  categoryId: 'categoryId'
+} as const
+
+export type TutorScalarFieldEnum = (typeof TutorScalarFieldEnum)[keyof typeof TutorScalarFieldEnum]
+
+
+export const CategoriesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug'
+} as const
+
+export type CategoriesScalarFieldEnum = (typeof CategoriesScalarFieldEnum)[keyof typeof CategoriesScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

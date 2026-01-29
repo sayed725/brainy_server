@@ -9,7 +9,20 @@
 * 🟢 You can import this file directly.
 */
 
+export const BookingStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const TimeSlot = {
+  MORNING: 'MORNING',
+  AFTERNOON: 'AFTERNOON',
+  EVENING: 'EVENING',
+  NIGHT: 'NIGHT'
+} as const
+
+export type TimeSlot = (typeof TimeSlot)[keyof typeof TimeSlot]

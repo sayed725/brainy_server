@@ -13,12 +13,94 @@ datasource db {
   provider = "postgresql"
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  authorId  Int
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum TimeSlot {
+  MORNING // e.g., 8:00 AM - 12:00 PM
+  AFTERNOON // e.g., 12:00 PM - 5:00 PM
+  EVENING // e.g., 5:00 PM - 9:00 PM
+  NIGHT // e.g., 9:00 PM - 12:00 AM
+}
+
+model Review {
+  id      Int    @id @default(autoincrement())
+  rating  Int
+  comment String? @db.Text
+
+  createdAt DateTime @default(now())
+
+  // Foreign Keys
+  userId    String
+  tutorId   String
+  bookingId String
+
+  // relations 
+  user    User?    @relation(fields: [userId], references: [id])
+  tutor   Tutor?   @relation(fields: [tutorId], references: [id])
+  booking Booking? @relation(fields: [bookingId], references: [id])
+
+  @@map("reviews")
+}
+
+model Booking {
+  id          String   @id
+  bookingDate DateTime
+  startTime   DateTime
+  endTime     DateTime
+
+  status     BookingStatus @default(PENDING)
+  totalPrice Int           @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Foreign Keys
+  userId  String
+  tutorId String
+
+  // relations 
+  user    User?    @relation(fields: [userId], references: [id])
+  tutor   Tutor?   @relation(fields: [tutorId], references: [id])
+  reviews Review[]
+
+  @@map("bookings")
+}
+
+model Tutor {
+  id            String     @id
+  bio           String?    @db.Text
+  rate          Int        @default(0)
+  timeSlots     TimeSlot[]
+  availability  Boolean?   @default(true)
+  averageRating Int?       @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Foreign Keys
+  userId     String
+  categoryId Int?
+
+  // Relations
+  user       User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categories Categories? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  bookings   Booking[]
+  reviews    Review[]
+
+  @@map("tutors")
+}
+
+model Categories {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  slug   String?
+  tutors Tutor[]
+
+  @@map("categories")
 }
 
 model User {
@@ -32,8 +114,11 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
-  role   String  @default("STUDENT")
-  status String? @default("ACTIVE")
+  role     String    @default("STUDENT")
+  status   String?   @default("ACTIVE")
+  tutors   Tutor[]
+  bookings Booking[]
+  reviews  Review[]
 
   @@unique([email])
   @@map("user")
