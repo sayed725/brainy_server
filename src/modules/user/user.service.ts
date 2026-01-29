@@ -17,6 +17,10 @@ const getSingleUser = async (userId: string ) => {
     where: { id: userId },
   });
 
+  if(!user){
+    throw new Error("User not found")
+  }
+
   return user;
 }
 
@@ -25,6 +29,16 @@ const updateUser = async(paramsId: string, data:User, userId: string, isAdmin: b
   if (paramsId !== userId && !isAdmin) {
     throw new Error("You are not authorized to update this user");
   }
+
+   const user = await prisma.user.findUnique({
+    where: { id: paramsId },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+
 
   // console.log(paramsId,data,userId,isAdmin)
 

@@ -4,6 +4,7 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from './lib/auth';
 import routes from './routes';
 import { notFound } from './middlewares/notFound';
+import errorHandler from './middlewares/globalErrorHandler';
 
 const app = express();
 
@@ -25,5 +26,6 @@ app.get('/', (req, res)=> {
 })
 
 app.use(notFound);
+app.use(errorHandler)
 
 export default app;

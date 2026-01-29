@@ -1,53 +1,51 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { categoriesService } from "./categories.service";
 
-const addCategories = async (req: Request, res: Response) => {
+const addCategories = async (req: Request, res: Response, next: NextFunction ) => {
   try {
     // console.log(req.body);
     const result = await categoriesService.addCategories(req.body);
-    res.status(201).json(result);
-  } catch (e) {
-    res.status(400).json({
-      error: "Category creation failed",
-      details: e,
+     res.status(201).json({
+      success: true,
+      message: "Category added successfully!",
+      data: result,
     });
+  } catch (error) {
+   next(error);
   }
 };
 
-const getCategories = async (req: Request, res: Response) => {
+const getCategories = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await categoriesService.getCategories();
-    res.status(201).json(result);
-  } catch (e) {
-    res.status(400).json({
-      error: "Category fetching failed",
-      details: e,
+    res.status(200).json({
+      success: true,
+      message: "Categories retrieved successfully!",
+      data: result,
     });
+  } catch (error) {
+   next(error);
   }
 };
 
-const deleteCategories = async (req: Request, res: Response) => {
+const deleteCategories = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const categoryId = Number(req.params.categoryId);
 
     if (isNaN(categoryId)) {
-      return res.status(400).json({
-        error: "Invalid category id",
-      });
+      throw new Error("category is must be a number")
     }
 
     const result = await categoriesService.deleteCategories(categoryId);
 
-    return res.status(204).json(result); // No Content
-
-  } catch (e: any) {
-    if (e.message === "Category not found") {
-      return res.status(404).json({ error: e.message });
-    }
-
-    return res.status(500).json({
-      error: "Category delete failed",
+        res.status(200).json({
+      success: true,
+      message: "Categories deleted successfully!",
+      data: result,
     });
+
+  } catch (error) {
+   next(error);
   }
 };
 
