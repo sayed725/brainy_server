@@ -27,6 +27,16 @@ const addTutor = async (data: Tutor, reqId: string, isAdmin: boolean) => {
     throw new Error("Tutor already exists");
   }
 
+  const existingCategory = await prisma.categories.findUnique({
+    where: {
+      id: data.categoryId as number,
+    },
+  });
+
+  if (!existingCategory) {
+    throw new Error("Category not found");
+  }
+
   const result = await prisma.$transaction(async (tx) => {
     // 1. Create the Tutor Profile
     const newTutor = await tx.tutor.create({
@@ -46,13 +56,22 @@ const addTutor = async (data: Tutor, reqId: string, isAdmin: boolean) => {
 };
 
 const getTutor = async () => {
-  // logic to get user here
 
-  // console.log("get route hit")
+  const [tutors, totalTutor] = await Promise.all([
+    prisma.tutor.findMany({
+      include: {
+        user: true, 
+        categories: true 
+      }
+    }),
+    prisma.tutor.count()
+  ]);
 
-  const result = await prisma.tutor.findMany();
-
-  return result;
+ 
+  return {
+    totalTutor,
+    data: tutors,
+  };
 };
 
 const updateTutor = async (
@@ -99,8 +118,41 @@ const updateTutor = async (
   return result;
 };
 
+const deleteTutor = async (
+  tutorId: string,
+  userId: string,
+  isAdmin: boolean,
+) => {
+  // delete tutor logic here
+
+  // console.log(tutorId, userId, isAdmin)
+
+  const existingTutor = await prisma.tutor.findFirst({
+    where: { id: tutorId },
+  });
+
+  //   console.log(existingTutor)
+
+  if (!existingTutor) {
+    throw new Error("Tutor not found");
+  }
+
+  if (existingTutor.userId !== userId && !isAdmin) {
+    throw new Error("You are not authorized to update this user");
+  }
+
+  const result = await prisma.tutor.delete({
+    where: {
+      id: tutorId,
+    },
+  });
+
+  return result;
+};
+
 export const tutorService = {
   addTutor,
   getTutor,
   updateTutor,
+  deleteTutor,
 };

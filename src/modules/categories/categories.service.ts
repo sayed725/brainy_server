@@ -12,10 +12,22 @@ const addCategories = async (data: Categories) => {
 
 
 
-const getCategories = async() =>{
-    const result = await prisma.categories.findMany();
-    return result
-}
+const getCategories = async () => {
+ 
+  const [categories, totalCategories] = await Promise.all([
+    prisma.categories.findMany({
+      orderBy: {
+        id: 'asc',
+      },
+    }),
+    prisma.categories.count(),
+  ]);
+
+  return {
+    totalCategories,
+    data: categories,
+  };
+};
 
 const deleteCategories = async(categoryId: number) =>{
     

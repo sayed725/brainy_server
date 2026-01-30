@@ -2,11 +2,20 @@ import { User } from "../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
 
 const getAllUsers = async () => {
-  // Logic to get all users
+  // Run both queries simultaneously
+  const [users, totalUser] = await Promise.all([
+    prisma.user.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    }),
+    prisma.user.count(),
+  ]);
 
-  const users = await prisma.user.findMany();
-
-  return users;
+  return {
+    totalUser,
+    data: users,
+  };
 };
 
 

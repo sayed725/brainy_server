@@ -65,10 +65,35 @@ const updateTutor = async(req: Request, res: Response, next: NextFunction ) => {
 
 }
 
+const deleteTutor = async (req: Request, res: Response, next:NextFunction) => {
+  try {
+    const user = req.user;
+
+    if (!user) {
+      throw new Error ("UnAuthorized Action")
+    }
+
+    const isAdmin = user.role === UserRole.ADMIN;
+    const { tutorId } = req.params;
+
+    const result = await tutorService.deleteTutor(tutorId as string, user.id, isAdmin);
+
+    res.status(200).json({
+      success: true,
+      message: "Tutor deleted successfully!",
+      data: result,
+    });
+
+  } catch (error) {
+   next(error)
+  }
+};
+
 
 
 export const tutorController = {
   addTutor,
   getTutor,
-  updateTutor
+  updateTutor,
+  deleteTutor
 };

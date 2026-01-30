@@ -7,6 +7,8 @@ const tutorRouter = Router();
 tutorRouter.post('/', auth(UserRole.ADMIN, UserRole.TUTOR,UserRole.USER),tutorController.addTutor);
 tutorRouter.get('/', auth(UserRole.ADMIN),tutorController.getTutor);
 tutorRouter.patch('/:tutorId', auth(UserRole.ADMIN,UserRole.TUTOR),tutorController.updateTutor);
+tutorRouter.delete('/:tutorId', auth(UserRole.ADMIN,UserRole.TUTOR),tutorController.deleteTutor);
+
 
 
 
