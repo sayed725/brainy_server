@@ -16,7 +16,7 @@ routes.use('/tutor', tutorRouter)
 
 routes.use('/categories', categoriesRouter)
 
-routes.get('/booking',bookingRouter)
+routes.use('/booking',bookingRouter)
 
 
 

@@ -26,6 +26,23 @@ const addTutor = async(req: Request, res: Response, next: NextFunction ) => {
 
 }
 
+const getSingleTutor = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+
+    const { tutorId } = req.params;
+    const result = await tutorService.getSingleTutor(tutorId as string);
+    res.status(200).json({
+      success: true,
+      message: "Tutor retrieved successfully!",
+      data: result,
+    });
+  } catch (error) {
+   next(error);
+  }
+};
+
+
+
 const getTutor = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await tutorService.getTutor();
@@ -94,6 +111,7 @@ const deleteTutor = async (req: Request, res: Response, next:NextFunction) => {
 export const tutorController = {
   addTutor,
   getTutor,
+  getSingleTutor,
   updateTutor,
   deleteTutor
 };

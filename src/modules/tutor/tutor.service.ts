@@ -55,6 +55,25 @@ const addTutor = async (data: Tutor, reqId: string, isAdmin: boolean) => {
   return result;
 };
 
+const getSingleTutor = async( tutorId: string) =>{
+    // get single tutor logic here
+    // console.log("ok", tutorId)
+
+    const existingTutor = await prisma.tutor.findUnique({
+        where: { id: tutorId },
+        include: {
+            user: true, 
+            categories: true 
+        }
+      });
+    
+      if (!existingTutor) {
+        throw new Error("Tutor not found");
+      }
+
+    return existingTutor;
+}
+
 const getTutor = async () => {
 
   const [tutors, totalTutor] = await Promise.all([
@@ -152,6 +171,7 @@ const deleteTutor = async (
 
 export const tutorService = {
   addTutor,
+  getSingleTutor,
   getTutor,
   updateTutor,
   deleteTutor,

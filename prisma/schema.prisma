@@ -48,12 +48,12 @@ model Review {
 
 model Booking {
   id          String   @id @default(uuid())
-  bookingDate DateTime
+  bookingDate DateTime?
   startTime   DateTime
   endTime     DateTime
 
   status     BookingStatus @default(PENDING)
-  totalPrice Int           @default(0)
+  totalPrice Int?           @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
