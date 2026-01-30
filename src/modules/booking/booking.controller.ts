@@ -67,10 +67,66 @@ const getSingleBooking = async (
   }
 };
 
+const updateBookingStatus = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+     const user = req.user;
+
+    if (!user) {
+      throw new Error("UnAuthorized Action");
+    }
+    const isAdmin = user.role === UserRole.ADMIN;
+
+    const { bookingId } = req.params;
+     
+    const result = await bookingService.updateBookingStatus(bookingId as string, req.body, user.id, isAdmin);
+    res.status(200).json({
+      success: true,
+      message: "Booking Status updated successfully!",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteBooking = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+     const user = req.user;
+
+    if (!user) {
+      throw new Error("UnAuthorized Action");
+    }
+    const isAdmin = user.role === UserRole.ADMIN;
+
+    const { bookingId } = req.params;
+     
+    const result = await bookingService.deleteBooking(bookingId as string, user.id, isAdmin);
+    res.status(200).json({
+      success: true,
+      message: "Booking Deleted successfully!",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+
+
 
 
 export const bookingController = {
   addBooking,
   getAllBooking,
-  getSingleBooking
+  getSingleBooking,
+  updateBookingStatus,
+  deleteBooking
 };

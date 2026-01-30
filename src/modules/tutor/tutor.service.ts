@@ -146,7 +146,7 @@ const deleteTutor = async (
 
   // console.log(tutorId, userId, isAdmin)
 
-  const existingTutor = await prisma.tutor.findFirst({
+  const existingTutor = await prisma.tutor.findUnique({
     where: { id: tutorId },
   });
 

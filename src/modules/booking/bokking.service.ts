@@ -72,12 +72,12 @@ const getSingleBooking = async (
 ) => {
   // get single booking logic here
   // console.log("ok",bookingId,userId,isAdmin)
-  const existingBooking = await prisma.booking.findFirst({
+  const existingBooking = await prisma.booking.findUnique({
     where: { id: bookingId },
     include: {
-            user: true, 
-            tutor: true 
-        }
+      user: true,
+      tutor: true,
+    },
   });
 
   if (!existingBooking) {
@@ -93,8 +93,83 @@ const getSingleBooking = async (
   return existingBooking;
 };
 
+// type BookingStatusValue = 'PENDING' | 'CONFIRMED' | 'CANCELLED';
+
+const updateBookingStatus = async (
+  bookingId: string,
+  data: any,
+  userId: string,
+  isAdmin: boolean,
+) => {
+  // update booking status logic here
+  //   console.log("ok", bookingId, data, userId, isAdmin);
+  if (
+    data.status !== "PENDING" &&
+    data.status !== "CONFIRMED" &&
+    data.status !== "CANCELLED"
+  ) {
+    throw new Error("Data must be valid");
+  }
+
+  const existingBooking = await prisma.booking.findUnique({
+    where: { id: bookingId },
+  });
+
+  if (!existingBooking) {
+    throw new Error("Booking not found");
+  }
+
+  //   console.log(existingBooking)
+
+  if (existingBooking.userId !== userId && !isAdmin) {
+    throw new Error("You are not authorized for booking");
+  }
+
+  const result = await prisma.booking.update({
+    where: {
+      id: bookingId,
+    },
+    data,
+  });
+
+  return result;
+};
+
+const deleteBooking = async (
+  bookingId: string,
+  userId: string,
+  isAdmin: boolean,
+) => {
+  // delete booking logic here
+  // console.log("ok")
+
+  const existingBooking = await prisma.booking.findUnique({
+    where: { id: bookingId },
+  });
+
+  if (!existingBooking) {
+    throw new Error("Booking not found");
+  }
+
+  //   console.log(existingBooking)
+
+  if (existingBooking.userId !== userId && !isAdmin) {
+    throw new Error("You are not authorized for booking");
+  }
+
+  const result = await prisma.booking.delete({
+    where: {
+      id: bookingId,
+    },
+  });
+
+  return result;
+};
+
 export const bookingService = {
   addBooking,
   getAllBooking,
   getSingleBooking,
+  updateBookingStatus,
+  deleteBooking,
 };
