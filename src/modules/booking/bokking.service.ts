@@ -183,18 +183,15 @@ const getBookingByTutorId = async (
 
 const updateBookingStatus = async (
   bookingId: string,
-  data: any,
+  data: { status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' },
   userId: string,
   isAdmin: boolean,
 ) => {
   // update booking status logic here
   //   console.log("ok", bookingId, data, userId, isAdmin);
-  if (
-    data.status !== "PENDING" &&
-    data.status !== "CONFIRMED" &&
-    data.status !== "CANCELLED"
-  ) {
-    throw new Error("Data must be valid");
+ const allowed = ["PENDING", "CONFIRMED", "CANCELLED"];
+  if (!allowed.includes(data.status)) {
+    throw new Error("Invalid status value");
   }
 
   const existingBooking = await prisma.booking.findUnique({
@@ -211,13 +208,35 @@ const updateBookingStatus = async (
     throw new Error("You are not authorized for booking");
   }
 
-  const result = await prisma.booking.update({
-    where: {
-      id: bookingId,
-    },
-    data,
-  });
+  const result = await prisma.$transaction(async(tx)=>{
+    // update status
 
+    const updateBooking = await tx.booking.update({
+        where: {id: bookingId},
+        data: {status: data.status},
+    })
+    
+    // by confirm booking increment 1
+    if(data.status === 'CONFIRMED' && existingBooking.status !== 'CONFIRMED'){
+        await tx.tutor.update({
+            where: { id: existingBooking.tutorId},
+            data: {totalBookIng: { increment: 1} }
+        })
+    }
+
+    // by cancel booking decrement 1 
+    if(data.status === 'CANCELLED' && existingBooking.status === 'CONFIRMED'){
+        await tx.tutor.update({
+            where: { id: existingBooking.tutorId},
+            data: {totalBookIng: { decrement: 1 }},
+        })
+    }
+
+    return updateBooking;
+
+
+
+  })
   return result;
 };
 
