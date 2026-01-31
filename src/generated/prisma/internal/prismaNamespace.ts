@@ -1078,6 +1078,7 @@ export const TutorScalarFieldEnum = {
   timeSlots: 'timeSlots',
   availability: 'availability',
   averageRating: 'averageRating',
+  totalBookIng: 'totalBookIng',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId',

@@ -67,6 +67,61 @@ const getSingleBooking = async (
   }
 };
 
+
+const getBookingByUserId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+
+    const user = req.user;
+
+    if (!user) {
+      throw new Error("UnAuthorized Action");
+    }
+    const isAdmin = user.role === UserRole.ADMIN;
+
+    const { userId } = req.params;
+     
+    const result = await bookingService.getBookingByUserId(userId as string,user?.id, isAdmin);
+    res.status(200).json({
+      success: true,
+      message: "Booking retrieved successfully!",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getBookingByTutorId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+
+    const user = req.user;
+
+    if (!user) {
+      throw new Error("UnAuthorized Action");
+    }
+    const isAdmin = user.role === UserRole.ADMIN;
+
+    const { tutorId } = req.params;
+     
+    const result = await bookingService.getBookingByTutorId(tutorId as string,user?.id, isAdmin);
+    res.status(200).json({
+      success: true,
+      message: "Booking retrieved successfully!",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const updateBookingStatus = async (
   req: Request,
   res: Response,
@@ -127,6 +182,8 @@ export const bookingController = {
   addBooking,
   getAllBooking,
   getSingleBooking,
+  getBookingByUserId,
+  getBookingByTutorId,
   updateBookingStatus,
   deleteBooking
 };

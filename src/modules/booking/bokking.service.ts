@@ -29,7 +29,7 @@ const addBooking = async (data: Booking, reqId: string, isAdmin: boolean) => {
     },
   });
 
-  if(existingBooking.length > 0){
+  if (existingBooking.length > 0) {
     throw new Error("You have already booked this tutor");
   }
 
@@ -65,6 +65,9 @@ const getAllBooking = async () => {
       include: {
         user: true,
         tutor: true,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     }),
     prisma.booking.count(),
@@ -102,6 +105,78 @@ const getSingleBooking = async (
   }
 
   return existingBooking;
+};
+
+const getBookingByUserId = async (
+  userId: string,
+  reqId: string,
+  isAdmin: boolean,
+) => {
+  // get booking by user id logic here
+
+  if (reqId !== userId && !isAdmin) {
+    throw new Error("You are not authorized to view these bookings");
+  }
+
+  const bookings = await prisma.booking.findMany({
+    where: {
+      userId: userId,
+    },
+    include: {
+      tutor: true,
+    },
+    orderBy: {
+      createdAt: "desc", // Show most recent bookings first
+    },
+  });
+
+  // 3. Optional: Check if the list is empty
+  if (bookings.length === 0) {
+    throw new Error("Currently You Do not have enough booking");
+  }
+
+  return bookings;
+};
+
+const getBookingByTutorId = async (
+  tutorId: string,
+  reqId: string,
+  isAdmin: boolean,
+) => {
+  // get booking by user id logic here
+
+  const tutorProfile = await prisma.tutor.findUnique({
+    where: { id: tutorId },
+  });
+
+  console.log(tutorProfile);
+
+  if (!tutorProfile) {
+    throw new Error("Tutor profile not found");
+  }
+
+  if (tutorProfile.userId !== reqId && !isAdmin) {
+    throw new Error("You are not authorized to view these bookings");
+  }
+
+  const bookings = await prisma.booking.findMany({
+    where: {
+      tutorId: tutorId,
+    },
+    include: {
+      user: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  // 3. Optional: Check if the list is empty
+  if (bookings.length === 0) {
+    throw new Error("Currently You Do not have any booking");
+  }
+
+  return bookings;
 };
 
 // type BookingStatusValue = 'PENDING' | 'CONFIRMED' | 'CANCELLED';
@@ -181,6 +256,8 @@ export const bookingService = {
   addBooking,
   getAllBooking,
   getSingleBooking,
+  getBookingByUserId,
+  getBookingByTutorId,
   updateBookingStatus,
   deleteBooking,
 };

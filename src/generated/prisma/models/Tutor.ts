@@ -29,12 +29,14 @@ export type AggregateTutor = {
 export type TutorAvgAggregateOutputType = {
   rate: number | null
   averageRating: number | null
+  totalBookIng: number | null
   categoryId: number | null
 }
 
 export type TutorSumAggregateOutputType = {
   rate: number | null
   averageRating: number | null
+  totalBookIng: number | null
   categoryId: number | null
 }
 
@@ -44,6 +46,7 @@ export type TutorMinAggregateOutputType = {
   rate: number | null
   availability: boolean | null
   averageRating: number | null
+  totalBookIng: number | null
   createdAt: Date | null
   updatedAt: Date | null
   userId: string | null
@@ -56,6 +59,7 @@ export type TutorMaxAggregateOutputType = {
   rate: number | null
   availability: boolean | null
   averageRating: number | null
+  totalBookIng: number | null
   createdAt: Date | null
   updatedAt: Date | null
   userId: string | null
@@ -69,6 +73,7 @@ export type TutorCountAggregateOutputType = {
   timeSlots: number
   availability: number
   averageRating: number
+  totalBookIng: number
   createdAt: number
   updatedAt: number
   userId: number
@@ -80,12 +85,14 @@ export type TutorCountAggregateOutputType = {
 export type TutorAvgAggregateInputType = {
   rate?: true
   averageRating?: true
+  totalBookIng?: true
   categoryId?: true
 }
 
 export type TutorSumAggregateInputType = {
   rate?: true
   averageRating?: true
+  totalBookIng?: true
   categoryId?: true
 }
 
@@ -95,6 +102,7 @@ export type TutorMinAggregateInputType = {
   rate?: true
   availability?: true
   averageRating?: true
+  totalBookIng?: true
   createdAt?: true
   updatedAt?: true
   userId?: true
@@ -107,6 +115,7 @@ export type TutorMaxAggregateInputType = {
   rate?: true
   availability?: true
   averageRating?: true
+  totalBookIng?: true
   createdAt?: true
   updatedAt?: true
   userId?: true
@@ -120,6 +129,7 @@ export type TutorCountAggregateInputType = {
   timeSlots?: true
   availability?: true
   averageRating?: true
+  totalBookIng?: true
   createdAt?: true
   updatedAt?: true
   userId?: true
@@ -220,6 +230,7 @@ export type TutorGroupByOutputType = {
   timeSlots: $Enums.TimeSlot[]
   availability: boolean | null
   averageRating: number | null
+  totalBookIng: number | null
   createdAt: Date
   updatedAt: Date
   userId: string
@@ -256,6 +267,7 @@ export type TutorWhereInput = {
   timeSlots?: Prisma.EnumTimeSlotNullableListFilter<"Tutor">
   availability?: Prisma.BoolNullableFilter<"Tutor"> | boolean | null
   averageRating?: Prisma.IntNullableFilter<"Tutor"> | number | null
+  totalBookIng?: Prisma.IntNullableFilter<"Tutor"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Tutor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tutor"> | Date | string
   userId?: Prisma.StringFilter<"Tutor"> | string
@@ -273,6 +285,7 @@ export type TutorOrderByWithRelationInput = {
   timeSlots?: Prisma.SortOrder
   availability?: Prisma.SortOrderInput | Prisma.SortOrder
   averageRating?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalBookIng?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -293,6 +306,7 @@ export type TutorWhereUniqueInput = Prisma.AtLeast<{
   timeSlots?: Prisma.EnumTimeSlotNullableListFilter<"Tutor">
   availability?: Prisma.BoolNullableFilter<"Tutor"> | boolean | null
   averageRating?: Prisma.IntNullableFilter<"Tutor"> | number | null
+  totalBookIng?: Prisma.IntNullableFilter<"Tutor"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Tutor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tutor"> | Date | string
   userId?: Prisma.StringFilter<"Tutor"> | string
@@ -310,6 +324,7 @@ export type TutorOrderByWithAggregationInput = {
   timeSlots?: Prisma.SortOrder
   availability?: Prisma.SortOrderInput | Prisma.SortOrder
   averageRating?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalBookIng?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -331,6 +346,7 @@ export type TutorScalarWhereWithAggregatesInput = {
   timeSlots?: Prisma.EnumTimeSlotNullableListFilter<"Tutor">
   availability?: Prisma.BoolNullableWithAggregatesFilter<"Tutor"> | boolean | null
   averageRating?: Prisma.IntNullableWithAggregatesFilter<"Tutor"> | number | null
+  totalBookIng?: Prisma.IntNullableWithAggregatesFilter<"Tutor"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Tutor"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Tutor"> | Date | string
   userId?: Prisma.StringWithAggregatesFilter<"Tutor"> | string
@@ -344,6 +360,7 @@ export type TutorCreateInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutTutorsInput
@@ -359,6 +376,7 @@ export type TutorUncheckedCreateInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
@@ -374,6 +392,7 @@ export type TutorUpdateInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutTutorsNestedInput
@@ -389,6 +408,7 @@ export type TutorUncheckedUpdateInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -404,6 +424,7 @@ export type TutorCreateManyInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
@@ -417,6 +438,7 @@ export type TutorUpdateManyMutationInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -428,6 +450,7 @@ export type TutorUncheckedUpdateManyInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -454,6 +477,7 @@ export type TutorCountOrderByAggregateInput = {
   timeSlots?: Prisma.SortOrder
   availability?: Prisma.SortOrder
   averageRating?: Prisma.SortOrder
+  totalBookIng?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -463,6 +487,7 @@ export type TutorCountOrderByAggregateInput = {
 export type TutorAvgOrderByAggregateInput = {
   rate?: Prisma.SortOrder
   averageRating?: Prisma.SortOrder
+  totalBookIng?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
 }
 
@@ -472,6 +497,7 @@ export type TutorMaxOrderByAggregateInput = {
   rate?: Prisma.SortOrder
   availability?: Prisma.SortOrder
   averageRating?: Prisma.SortOrder
+  totalBookIng?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -484,6 +510,7 @@ export type TutorMinOrderByAggregateInput = {
   rate?: Prisma.SortOrder
   availability?: Prisma.SortOrder
   averageRating?: Prisma.SortOrder
+  totalBookIng?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -493,6 +520,7 @@ export type TutorMinOrderByAggregateInput = {
 export type TutorSumOrderByAggregateInput = {
   rate?: Prisma.SortOrder
   averageRating?: Prisma.SortOrder
+  totalBookIng?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
 }
 
@@ -642,6 +670,7 @@ export type TutorCreateWithoutReviewsInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutTutorsInput
@@ -656,6 +685,7 @@ export type TutorUncheckedCreateWithoutReviewsInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
@@ -686,6 +716,7 @@ export type TutorUpdateWithoutReviewsInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutTutorsNestedInput
@@ -700,6 +731,7 @@ export type TutorUncheckedUpdateWithoutReviewsInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -714,6 +746,7 @@ export type TutorCreateWithoutBookingsInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutTutorsInput
@@ -728,6 +761,7 @@ export type TutorUncheckedCreateWithoutBookingsInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
@@ -758,6 +792,7 @@ export type TutorUpdateWithoutBookingsInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutTutorsNestedInput
@@ -772,6 +807,7 @@ export type TutorUncheckedUpdateWithoutBookingsInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -786,6 +822,7 @@ export type TutorCreateWithoutCategoriesInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutTutorsInput
@@ -800,6 +837,7 @@ export type TutorUncheckedCreateWithoutCategoriesInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
@@ -843,6 +881,7 @@ export type TutorScalarWhereInput = {
   timeSlots?: Prisma.EnumTimeSlotNullableListFilter<"Tutor">
   availability?: Prisma.BoolNullableFilter<"Tutor"> | boolean | null
   averageRating?: Prisma.IntNullableFilter<"Tutor"> | number | null
+  totalBookIng?: Prisma.IntNullableFilter<"Tutor"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Tutor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tutor"> | Date | string
   userId?: Prisma.StringFilter<"Tutor"> | string
@@ -856,6 +895,7 @@ export type TutorCreateWithoutUserInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   categories?: Prisma.CategoriesCreateNestedOneWithoutTutorsInput
@@ -870,6 +910,7 @@ export type TutorUncheckedCreateWithoutUserInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   categoryId?: number | null
@@ -910,6 +951,7 @@ export type TutorCreateManyCategoriesInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
@@ -922,6 +964,7 @@ export type TutorUpdateWithoutCategoriesInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutTutorsNestedInput
@@ -936,6 +979,7 @@ export type TutorUncheckedUpdateWithoutCategoriesInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -950,6 +994,7 @@ export type TutorUncheckedUpdateManyWithoutCategoriesInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -962,6 +1007,7 @@ export type TutorCreateManyUserInput = {
   timeSlots?: Prisma.TutorCreatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: boolean | null
   averageRating?: number | null
+  totalBookIng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   categoryId?: number | null
@@ -974,6 +1020,7 @@ export type TutorUpdateWithoutUserInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   categories?: Prisma.CategoriesUpdateOneWithoutTutorsNestedInput
@@ -988,6 +1035,7 @@ export type TutorUncheckedUpdateWithoutUserInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   categoryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1002,6 +1050,7 @@ export type TutorUncheckedUpdateManyWithoutUserInput = {
   timeSlots?: Prisma.TutorUpdatetimeSlotsInput | $Enums.TimeSlot[]
   availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   averageRating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBookIng?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   categoryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1054,6 +1103,7 @@ export type TutorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   timeSlots?: boolean
   availability?: boolean
   averageRating?: boolean
+  totalBookIng?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
@@ -1072,6 +1122,7 @@ export type TutorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   timeSlots?: boolean
   availability?: boolean
   averageRating?: boolean
+  totalBookIng?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
@@ -1087,6 +1138,7 @@ export type TutorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   timeSlots?: boolean
   availability?: boolean
   averageRating?: boolean
+  totalBookIng?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
@@ -1102,13 +1154,14 @@ export type TutorSelectScalar = {
   timeSlots?: boolean
   availability?: boolean
   averageRating?: boolean
+  totalBookIng?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
   categoryId?: boolean
 }
 
-export type TutorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bio" | "rate" | "timeSlots" | "availability" | "averageRating" | "createdAt" | "updatedAt" | "userId" | "categoryId", ExtArgs["result"]["tutor"]>
+export type TutorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bio" | "rate" | "timeSlots" | "availability" | "averageRating" | "totalBookIng" | "createdAt" | "updatedAt" | "userId" | "categoryId", ExtArgs["result"]["tutor"]>
 export type TutorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.Tutor$userArgs<ExtArgs>
   categories?: boolean | Prisma.Tutor$categoriesArgs<ExtArgs>
@@ -1140,6 +1193,7 @@ export type $TutorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     timeSlots: $Enums.TimeSlot[]
     availability: boolean | null
     averageRating: number | null
+    totalBookIng: number | null
     createdAt: Date
     updatedAt: Date
     userId: string
@@ -1577,6 +1631,7 @@ export interface TutorFieldRefs {
   readonly timeSlots: Prisma.FieldRef<"Tutor", 'TimeSlot[]'>
   readonly availability: Prisma.FieldRef<"Tutor", 'Boolean'>
   readonly averageRating: Prisma.FieldRef<"Tutor", 'Int'>
+  readonly totalBookIng: Prisma.FieldRef<"Tutor", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Tutor", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Tutor", 'DateTime'>
   readonly userId: Prisma.FieldRef<"Tutor", 'String'>
