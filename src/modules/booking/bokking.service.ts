@@ -22,6 +22,17 @@ const addBooking = async (data: Booking, reqId: string, isAdmin: boolean) => {
     throw new Error("Tutor not found");
   }
 
+  const existingBooking = await prisma.booking.findMany({
+    where: {
+      userId: userId,
+      tutorId: tutorId,
+    },
+  });
+
+  if(existingBooking.length > 0){
+    throw new Error("You have already booked this tutor");
+  }
+
   // Calculate Duration in Hours
   //   const start = new Date(startTime);
   //   const end = new Date(endTime);
@@ -56,7 +67,7 @@ const getAllBooking = async () => {
         tutor: true,
       },
     }),
-    prisma.tutor.count(),
+    prisma.booking.count(),
   ]);
 
   return {
